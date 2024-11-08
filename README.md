@@ -41,14 +41,14 @@ The dataset for this case study comes from the [Healthcare Diabetes dataset on K
 
 1. Initial Data Inspection
 
-To better understand the dataset, we first conducted an exploratory data analysis (EDA), examining the first few rows and column names.
+- To better understand the dataset, we first conducted an exploratory data analysis (EDA), examining the first few rows and column names.
 
           head(Diabetes_Healthcare_Data)
           colnames(Diabetes_Healthcare_Data)
 
 2. Data CLeaning
 
-We removed irrelevant columns such as "Age Group," "Pregnancy Risk Category," and "BMI Category," which were unnecessary for the prediction task.
+- We removed irrelevant columns such as "Age Group," "Pregnancy Risk Category," and "BMI Category," which were unnecessary for the prediction task.
 
           Diabetes_Healthcare_Data <- Diabetes_Healthcare_Data[, !(colnames(Diabetes_Healthcare_Data) %in% c("Age Group", "Pregnancy Risk Category", "BMI Category"))]
 
@@ -149,4 +149,29 @@ Now, we split the data into two parts: one for training the model and the other 
           test_data <- data[-train_indices, ]
 
 This code randomly splits the dataset into train_data (80%) and test_data (20%). The set.seed(123) ensures the split is the same every time we run the code.
+
+
+## Model Building and Evaluation
+
+In this section, you can describe how the machine learning model (Logistic Regression in this case) is built and evaluated.
+
+Building the Model: Explain how you train the logistic regression model using the training data.
+
+          model <- glm(Diabetes_Status ~ ., data = train_data, family = "binomial")
+          summary(model)
+
+Example code for confusion matrix and accuracy:
+          
+          pred <- predict(model, test_data, type = "response")
+          pred_class <- ifelse(pred > 0.5, 1, 0)
+          confusion_matrix <- table(pred_class, test_data$Diabetes_Status)
+          accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+          print(accuracy)
+          
+ROC Curve: Plot the ROC curve to assess model performance.
+
+          library(pROC)
+          roc_curve <- roc(test_data$Diabetes_Status, pred)
+          plot(roc_curve)
+
 
