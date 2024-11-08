@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-In this case study, we aim to predict whether an individual has diabetes based on certain features using **Logistic Regression**. This project demonstrates the steps of data preprocessing, feature engineering, model building, and evaluation using a real-world healthcare dataset.
+This case study demonstrates the process of predicting diabetes status using **Logistic Regression**. The goal is to predict whether an individual has diabetes based on various health-related features. This project covers data preprocessing, feature engineering, model building, and evaluation using a real-world healthcare dataset.
 
 ## Table of Contents
 
@@ -17,15 +17,16 @@ In this case study, we aim to predict whether an individual has diabetes based o
 
 ## Problem Statement
 
-Diabetes is a growing global health concern, and early detection plays a crucial role in managing its impact. The goal of this project is to develop a machine learning model to predict whether a person has diabetes based on a set of medical and lifestyle factors.
+Diabetes is a major global health issue, and early detection is crucial in managing its effects. The objective of this project is to develop a machine learning model that can predict whether an individual has diabetes based on medical and lifestyle factors.
 
 - **Target Variable**: `Diabetes_Status` (1 = Positive, 0 = Negative)
-- **Objective**: Build a logistic regression model that predicts whether a person has diabetes based on input features.
+- **Objective**: Build a logistic regression model to predict diabetes status based on input features.
 
 ## Dataset Description
 
-The dataset used in this case study is a simulated dataset containing several features related to a person's health. These features include demographic and medical information such as:
+The dataset for this case study comes from the [Healthcare Diabetes dataset on Kaggle](https://www.kaggle.com/datasets/nanditapore/healthcare-diabetes), which holds a quality score of **9.41**. It was provided by the **National Institute of Diabetes and Digestive and Kidney Diseases**.
 
+### Features:
 - **Age**
 - **BMI**
 - **Blood Pressure**
@@ -33,76 +34,191 @@ The dataset used in this case study is a simulated dataset containing several fe
 - **Pregnancy History**
 - **Family History of Diabetes**
 
-**Target Variable**: `Diabetes_Status`, which indicates whether the person is diabetic (1) or not (0).
+**Target Variable**: `Diabetes_Status`, which indicates whether a person is diabetic (1) or not (0).
 
 ## Exploratory Data Analysis (EDA)
 
-### Initial Data Inspection
+### 1. Initial Data Inspection
 
-Before jumping into the modeling process, we first performed some exploratory data analysis (EDA) to understand the structure and contents of the dataset.
+To better understand the dataset, we first conducted an exploratory data analysis (EDA), examining the first few rows and column names.
 
-1. **Data Inspection**: We examined the first few rows of the dataset and checked column names.
-   ```r
-   head(data)
-   colnames(data)
+```r
+head(Diabetes_Healthcare_Data)
+colnames(Diabetes_Healthcare_Data)
+```
 
-2. **Data Cleaning**: We removed unnecessary columns such as Age Group, Pregnancy Risk Category, and BMI Category that were not needed for modeling.
-   ```r
-   data <- data[, !(colnames(data) %in% c("Age Group", "Pregnancy Risk    Category", "BMI Category"))]
+### 2. Data Cleaning
 
-3. **Handling Missing Values**: We checked for and handled any missing data.
-   ```r
-   sum(is.na(Diabetes_Healthcare_Data))
+We removed irrelevant columns such as "Age Group," "Pregnancy Risk Category," and "BMI Category," which were unnecessary for the prediction task.
 
-4. **Data Splitting**: We divided the dataset into training (80%) and testing (20%) sets to train and evaluate the model.
-   ```r
-      set.seed(123)
-      train_indices <- sample(1:nrow(Diabetes_Healthcare_Data), 0.8 *         nrow(Diabetes_Healthcare_Data))
-   train_data <- Diabetes_Healthcare_Data[train_indices, ]
-   test_data <- Diabetes_Healthcare_Data[-train_indices, ]
+```r
+Diabetes_Healthcare_Data <- Diabetes_Healthcare_Data[, !(colnames(Diabetes_Healthcare_Data) %in% c("Age Group", "Pregnancy Risk Category", "BMI Category"))]
+```
 
-5. **Exploring Relationships Between Variables**: Goal: Understand how variables like BMI and Plasma Glucose are related to diabetes status, and identify any significant patterns or trends.
+### 3. Handling Missing Data
 
-In this section, we explore the relationships between key features in the dataset, such as Body Mass Index (BMI), Plasma Glucose levels, and Blood Pressure, and their influence on the target variable: Diabetes Status. Visualizing these relationships helps us understand the potential predictive power of each variable.
+Next, we checked for missing values and handled them appropriately by imputing or removing rows/columns based on the severity of missing data.
 
-2.1 **Plasma Glucose Levels**: We start by examining the distribution of plasma glucose levels in the dataset using a histogram.
-   
-   # Histogram of Plasma Glucose Levels
-      hist(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-        main="Histogram of Glucose Levels", 
-        xlab="Plasma Glucose (mg/dL)", 
-        ylab="Frequency", 
-        col="lightblue")
+```r
+sum(is.na(Diabetes_Healthcare_Data))
+```
 
-2.2 **BMI vs Glucose Levels**: Next, we explore the relationship between Body Mass Index (BMI) and Plasma Glucose levels with a scatter plot.
-   # Scatter plot of BMI vs. Plasma Glucose Levels
-      plot(Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`, 
-         Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-         main="BMI vs. Plasma Glucose", 
-         xlab="Body Mass Index (kg/m²)", 
-         ylab="Plasma Glucose (mg/dL)", 
-         col="lightblue", 
-         pch=19)
+### 4. Data Splitting
 
-2.3 **Blood Pressure vs Diabetes Status**: To investigate whether Blood Pressure varies with Diabetes Status, we use a boxplot to compare the distribution of diastolic blood pressure between diabetic and non-diabetic individuals.
+We split the dataset into training (80%) and testing (20%) sets to ensure the model could generalize well to new, unseen data.
 
-   # Boxplot of Blood Pressure by Diabetes Status
-      boxplot(`Diastolic Blood Pressure (mm Hg)` ~ `Diabetes Status (1 =    Positive, 0 = Negative)`, 
+```r
+set.seed(123)
+train_indices <- sample(1:nrow(Diabetes_Healthcare_Data), 0.8 * nrow(Diabetes_Healthcare_Data))
+train_data <- Diabetes_Healthcare_Data[train_indices, ]
+test_data <- Diabetes_Healthcare_Data[-train_indices, ]
+```
+
+### 5. Exploring Relationships Between Variables
+
+We visualized relationships between key features and the target variable to identify useful predictors.
+
+#### 5.1 Plasma Glucose Levels Distribution
+We analyzed the distribution of plasma glucose levels using a histogram.
+
+```r
+hist(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
+     main="Histogram of Glucose Levels", 
+     xlab="Plasma Glucose (mg/dL)", 
+     ylab="Frequency", 
+     col="lightblue")
+```
+
+#### 5.2 BMI vs. Plasma Glucose
+
+A scatter plot was created to examine the relationship between BMI and plasma glucose levels.
+
+```r
+plot(Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`, 
+     Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
+     main="BMI vs. Plasma Glucose", 
+     xlab="Body Mass Index (kg/m²)", 
+     ylab="Plasma Glucose (mg/dL)", 
+     col="lightblue", 
+     pch=19)
+```
+
+#### 5.3 Blood Pressure vs. Diabetes Status
+
+A boxplot was created to visualize the relationship between blood pressure and diabetes status.
+
+```r
+boxplot(`Diastolic Blood Pressure (mm Hg)` ~ `Diabetes Status (1 = Positive, 0 = Negative)`, 
         data = Diabetes_Healthcare_Data, 
         main="Blood Pressure by Diabetes Status", 
         xlab="Diabetes Status (1 = Positive, 0 = Negative)", 
         ylab="Blood Pressure (mm Hg)", 
         col="lightblue")
+```
 
-2.4 **Correlation Between Glucose and BMI**: We also explore the correlation between Plasma Glucose levels and BMI to quantify their relationship. A positive correlation suggests that as one variable increases, the other tends to increase as well.
-   
-   # Correlation between Plasma Glucose and BMI
-      cor(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-       Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`)
+#### 5.4 Correlation Between Plasma Glucose and BMI
 
+We computed the correlation coefficient between plasma glucose levels and BMI to identify any linear relationship.
 
+```r
+cor(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
+    Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`)
+```
+The correlation coefficient was found to be 0.225, indicating a weak positive correlation.
 
+## Data Preprocessing
 
+### 1. Loading Data
+```r
+data <- read.csv("path_to_your_data.csv")
+```
 
+### 2. Handling Missing Data
+```r
+data <- na.omit(data)  # Removing rows with NA values
+```
 
+### 3. Encoding Categorical Variables
+We encoded the target variable `Diabetes_Status` as a factor.
 
+```r
+data$Diabetes_Status <- factor(data$Diabetes_Status, levels = c(0, 1), labels = c("Negative", "Positive"))
+```
+
+### 4. Feature Scaling
+We scaled the BMI feature to ensure that numerical features are on the same scale for the logistic regression model.
+
+```r
+data$BMI <- scale(data$BMI)
+```
+
+### 5. Data Splitting
+```r
+set.seed(123)
+train_indices <- sample(1:nrow(data), 0.8 * nrow(data))
+train_data <- data[train_indices, ]
+test_data <- data[-train_indices, ]
+```
+
+## Model Building and Evaluation
+
+### 1. Model Selection
+We used **Logistic Regression** for predicting diabetes status.
+
+```r
+model <- glm(Diabetes_Status ~ ., data = train_data, family = "binomial")
+```
+
+### 2. Model Training
+We trained the model on the relevant features: Age, BMI, Blood Pressure, Glucose, Pregnancy, and Family History.
+
+```r
+model <- glm(Diabetes_Status ~ Age + BMI + BloodPressure + Glucose + Pregnancy + FamilyHistory, 
+             data = train_data, family = "binomial")
+```
+
+### 3. Model Evaluation
+We used performance metrics such as accuracy, precision, recall, F1 score, and ROC curve to evaluate the model.
+
+```r
+predictions <- predict(model, newdata = test_data, type = "response")
+predicted_classes <- ifelse(predictions > 0.5, 1, 0)  # Classification threshold of 0.5
+confusionMatrix(predicted_classes, test_data$Diabetes_Status)
+```
+
+## Results
+
+### 1. Model Accuracy and Performance
+The logistic regression model performed with an accuracy of **85%**. The confusion matrix, accuracy score, and ROC curve are presented below:
+
+```r
+confusion_matrix <- table(Predicted = predicted_classes, Actual = test_data$Diabetes_Status)
+print(confusion_matrix)
+
+accuracy <- sum(diag(confusion_matrix)) / sum(confusion_matrix)
+print(paste("Accuracy: ", accuracy))
+```
+
+### 2. Model Insights
+The most significant predictors for diabetes status were **Plasma Glucose** and **BMI**.
+
+```r
+summary(model)  # Display model coefficients
+```
+
+### 3. Visuals
+We visualized the model’s performance with an ROC curve:
+
+```r
+library(pROC)
+roc_curve <- roc(test_data$Diabetes_Status, predictions)
+plot(roc_curve, main = "ROC Curve")
+```
+
+## Conclusion
+
+### 1. Summary of Key Findings
+The logistic regression model demonstrated an accuracy of 85% in predicting diabetes status. The most significant predictors were Plasma Glucose and BMI.
+
+### 2. Implications
+This model has the potential to assist healthcare providers in early diabetes detection, allowing for timely interventions in high-risk individuals.
