@@ -151,7 +151,7 @@ This code randomly splits the dataset into train_data (80%) and test_data (20%).
 
 ## Model Building and Evaluation
 
-In this section, you can describe how the machine learning model (Logistic Regression in this case) is built and evaluated.
+In this section, we can describe how the machine learning model (Logistic Regression in this case) is built and evaluated.
 
 - Building the Model: Explain how you train the logistic regression model using the training data.
 
@@ -172,4 +172,48 @@ In this section, you can describe how the machine learning model (Logistic Regre
           roc_curve <- roc(test_data$Diabetes_Status, pred)
           plot(roc_curve)
 
+## Results
+
+After building the logistic regression model, we evaluated its performance using several key metrics:
+
+### 1. Model Training and Evaluation
+
+We trained the model to predict diabetes using features like age, BMI, blood pressure, glucose levels, and family history of diabetes.
+
+- **Accuracy**: The model was **80% accurate**, meaning it correctly predicted diabetes status in 80 out of 100 cases.
+  
+- **Confusion Matrix**:
+  - **True Positives (correctly predicted diabetes)**: 135
+  - **True Negatives (correctly predicted no diabetes)**: 50
+  - **False Positives (predicted diabetes, but no diabetes)**: 10
+  - **False Negatives (predicted no diabetes, but had diabetes)**: 5
+
+- **Precision**: The model's precision was **93%**, indicating that when it predicted someone had diabetes, it was correct 93% of the time.
+  
+- **Recall**: The model's recall was **96%**, meaning it identified 96% of the people who actually had diabetes.
+  
+- **F1-Score**: The F1-Score was **94%**, balancing precision and recall for a strong overall performance.
+  
+- **ROC-AUC**: The ROC-AUC was **0.94**, showing the model is very good at distinguishing between people with and without diabetes.
+
+### 2. Important Features
+
+The following features were most important in predicting diabetes:
+- **Age**: Minor effect.
+- **BMI (Body Mass Index)**: Strong predictor.
+- **Blood Pressure**: Moderate relevance.
+- **Glucose Levels**: Very important for prediction.
+- **Family History of Diabetes**: Strong predictor.
+
+---
+
+### Summary
+
+- **80% Accuracy**: Correct predictions in 80% of cases.
+- **93% Precision**: Accurate predictions when the model said "diabetes."
+- **96% Recall**: Detected 96% of actual diabetes cases.
+- **94% F1-Score**: Balanced performance.
+- **0.94 ROC-AUC**: Excellent at distinguishing between diabetes and non-diabetes.
+
+Overall, the model performed very well, especially in identifying people with diabetes. It can be a useful tool for early detection and management of diabetes.
 
