@@ -247,18 +247,21 @@ By addressing these areas, we could further enhance the model’s reliability an
 ---
 
 ## Interactive Dashboard
+The interactive dashboard allows users to explore various data visualizations and model predictions related to diabetes trends. Users can:
 
-An **interactive dashboard** has been developed to visualize the model's predictions and the relationships between input features and diabetes status. The dashboard allows users to:
+Explore Graphs and Visualizations:
 
-1. **Input personal health data** (e.g., age, BMI, glucose levels).
-2. **View predictions** about the likelihood of diabetes.
-3. **Visualize the impact** of different features on the prediction outcome.
+View different charts that highlight the relationship between diabetes and key health factors such as age, BMI, glucose levels, etc.
+Understand the Model's Performance:
 
-### Features of the Dashboard:
-- **User Input Section**: Allows users to enter their health metrics (age, BMI, glucose levels, etc.).
-- **Prediction Display**: Shows whether the individual is predicted to have diabetes or not.
-- **Feature Importance Graph**: A bar chart displaying the relative importance of each feature in the model's decision-making process.
-- **Model Performance Metrics**: Displays evaluation metrics (accuracy, precision, recall) in a clean, interactive format.
+See the performance metrics of the predictive model, including accuracy and precision, to assess how well the model works in predicting diabetes outcomes.
+
+Key Features:
+Prediction Visualization: Displays the predicted likelihood of diabetes based on the model’s outputs.
+Feature Importance: Shows which features (such as glucose levels or BMI) are most important in predicting diabetes.
+Performance Metrics: Displays metrics like accuracy and recall to evaluate model effectiveness.
+You can explore the interactive dashboard here:
+Uncovering Diabetes Trends - Interactive Dashboard
 
 You can access the interactive dashboard here: [**Diabetes Prediction Dashboard**](https://public.tableau.com/app/profile/yoada.zeleke/viz/UncoveringDiabetesTrendsEDAandPredictiveModeling/Dashboard1)
 
