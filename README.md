@@ -251,18 +251,14 @@ The interactive dashboard allows users to explore various data visualizations an
 
 Explore Graphs and Visualizations:
 
-View different charts that highlight the relationship between diabetes and key health factors such as age, BMI, glucose levels, etc.
+-View different charts that highlight the relationship between diabetes and key health factors such as age, BMI, glucose levels, etc.
 Understand the Model's Performance:
-
 See the performance metrics of the predictive model, including accuracy and precision, to assess how well the model works in predicting diabetes outcomes.
 
 Key Features:
-Prediction Visualization: Displays the predicted likelihood of diabetes based on the model’s outputs.
-Feature Importance: Shows which features (such as glucose levels or BMI) are most important in predicting diabetes.
-Performance Metrics: Displays metrics like accuracy and recall to evaluate model effectiveness.
-You can explore the interactive dashboard here:
-Uncovering Diabetes Trends - Interactive Dashboard
-
-You can access the interactive dashboard here: [**Diabetes Prediction Dashboard**](https://public.tableau.com/app/profile/yoada.zeleke/viz/UncoveringDiabetesTrendsEDAandPredictiveModeling/Dashboard1)
+-Prediction Visualization: Displays the predicted likelihood of diabetes based on the model’s outputs.
+-Feature Importance: Shows which features (such as glucose levels or BMI) are most important in predicting diabetes.
+-Performance Metrics: Displays metrics like accuracy and recall to evaluate model effectiveness.
+-You can explore the interactive dashboard here: [**Diabetes Prediction Dashboard**](https://public.tableau.com/app/profile/yoada.zeleke/viz/UncoveringDiabetesTrendsEDAandPredictiveModeling/Dashboard1)
 
 The dashboard is powered by **Tableau** and provides an easy-to-use interface to help individuals better understand their potential risk of diabetes based on their health data.
