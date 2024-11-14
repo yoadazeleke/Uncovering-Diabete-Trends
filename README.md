@@ -189,9 +189,11 @@ We trained the model to predict diabetes using features like age, BMI, blood pre
   - **False Negatives (predicted no diabetes, but had diabetes)**: 5
 
 - **Precision**: This visualization shows the trade-off between precision and recall for our diabetes prediction model. Ideally, the curve should be closer to the top-right corner, indicating high precision (correctly identifying diabetic cases) and high recall (finding most of the actual diabetic patients).
+
 ![PR CURVE](https://github.com/user-attachments/assets/48a88c58-2d25-46f1-9e41-72f25bd5e2fa)
 
 - **ROC-AUC**: This curve depicts the model's ability to differentiate between individuals with and without diabetes. The closer the curve is to the top-left corner, the better the model performs. In this case, a good performance is shown by the curve's position.
+
 ![ROC Curve Diabetes](https://github.com/user-attachments/assets/9359a5c9-1f0f-418a-b276-73cf2f158acf)
 
 ### 2. Important Features
