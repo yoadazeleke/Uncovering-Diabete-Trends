@@ -76,7 +76,7 @@ The dataset for this case study comes from the [Healthcare Diabetes dataset on K
                     xlab="Plasma Glucose (mg/dL)", 
                     ylab="Frequency", 
                     col="lightblue")
-          
+
 5.2 BMI vs. Plasma Glucose
 - A scatter plot was created to examine the relationship between BMI and plasma glucose levels.
 
@@ -189,12 +189,14 @@ We trained the model to predict diabetes using features like age, BMI, blood pre
   - **False Negatives (predicted no diabetes, but had diabetes)**: 5
 
 - **Precision**: The model's precision was **93%**, indicating that when it predicted someone had diabetes, it was correct 93% of the time.
-  
+![PR CURVE](https://github.com/user-attachments/assets/48a88c58-2d25-46f1-9e41-72f25bd5e2fa)
+
 - **Recall**: The model's recall was **96%**, meaning it identified 96% of the people who actually had diabetes.
   
 - **F1-Score**: The F1-Score was **94%**, balancing precision and recall for a strong overall performance.
   
 - **ROC-AUC**: The ROC-AUC was **0.94**, showing the model is very good at distinguishing between people with and without diabetes.
+![ROC Curve Diabetes](https://github.com/user-attachments/assets/9359a5c9-1f0f-418a-b276-73cf2f158acf)
 
 ### 2. Important Features
 
@@ -247,10 +249,7 @@ By addressing these areas, we could further enhance the model’s reliability an
 ---
 
 ## Interactive Dashboard
-The interactive dashboard allows users to explore various data visualizations and model predictions related to diabetes trends. Users can:
-
-Explore Graphs and Visualizations:
-
+The interactive dashboard allows users to explore various data visualizations and model predictions related to diabetes trends. 
 -View different charts that highlight the relationship between diabetes and key health factors such as age, BMI, glucose levels, etc.
 -You can explore the interactive dashboard here: [**Diabetes Prediction Dashboard**](https://public.tableau.com/app/profile/yoada.zeleke/viz/UncoveringDiabetesTrendsEDAandPredictiveModeling/Dashboard1)
 
