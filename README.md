@@ -188,14 +188,10 @@ We trained the model to predict diabetes using features like age, BMI, blood pre
   - **False Positives (predicted diabetes, but no diabetes)**: 10
   - **False Negatives (predicted no diabetes, but had diabetes)**: 5
 
-- **Precision**: The model's precision was **93%**, indicating that when it predicted someone had diabetes, it was correct 93% of the time.
+- **Precision**: This visualization shows the trade-off between precision and recall for our diabetes prediction model. Ideally, the curve should be closer to the top-right corner, indicating high precision (correctly identifying diabetic cases) and high recall (finding most of the actual diabetic patients).
 ![PR CURVE](https://github.com/user-attachments/assets/48a88c58-2d25-46f1-9e41-72f25bd5e2fa)
 
-- **Recall**: The model's recall was **96%**, meaning it identified 96% of the people who actually had diabetes.
-  
-- **F1-Score**: The F1-Score was **94%**, balancing precision and recall for a strong overall performance.
-  
-- **ROC-AUC**: The ROC-AUC was **0.94**, showing the model is very good at distinguishing between people with and without diabetes.
+- **ROC-AUC**: This curve depicts the model's ability to differentiate between individuals with and without diabetes. The closer the curve is to the top-left corner, the better the model performs. In this case, a good performance is shown by the curve's position.
 ![ROC Curve Diabetes](https://github.com/user-attachments/assets/9359a5c9-1f0f-418a-b276-73cf2f158acf)
 
 ### 2. Important Features
@@ -218,6 +214,7 @@ The following features were most important in predicting diabetes:
 - **0.94 ROC-AUC**: Excellent at distinguishing between diabetes and non-diabetes.
 
 Overall, the model performed very well, especially in identifying people with diabetes. It can be a useful tool for early detection and management of diabetes.
+![Dashboard 1 (8)](https://github.com/user-attachments/assets/163a9a66-98ab-4935-81b5-e515f9f92349)
 
 ## Conclusion
 
