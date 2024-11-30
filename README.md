@@ -185,15 +185,15 @@ The model demonstrated the significance of features like **BMI**, **glucose leve
 
 While the model performed well, there are several areas for improvement:
 
-- 1. **Incorporate Additional Features**: Adding more health-related features, such as cholesterol levels, physical activity, or diet, could improve prediction accuracy.
+-  **Incorporate Additional Features**: Adding more health-related features, such as cholesterol levels, physical activity, or diet, could improve prediction accuracy.
    
-- 2. **Hyperparameter Tuning**: Experimenting with hyperparameter optimization (e.g., regularization techniques, solvers) could enhance model performance and prevent overfitting.
+- **Hyperparameter Tuning**: Experimenting with hyperparameter optimization (e.g., regularization techniques, solvers) could enhance model performance and prevent overfitting.
    
-- 3. **Cross-Validation**: Implementing k-fold cross-validation would provide a more robust estimate of model performance by using different subsets of the data for training and testing.
+- **Cross-Validation**: Implementing k-fold cross-validation would provide a more robust estimate of model performance by using different subsets of the data for training and testing.
 
-- 4. **Advanced Models**: Exploring more advanced models like **Random Forests**, **Gradient Boosting Machines (GBM)**, or **Neural Networks** may yield better results for this classification problem.
+- **Advanced Models**: Exploring more advanced models like **Random Forests**, **Gradient Boosting Machines (GBM)**, or **Neural Networks** may yield better results for this classification problem.
 
-- 5. **Longer Time Horizons**: Gathering data over longer time periods could improve the model's ability to predict diabetes onset and progression more accurately.
+- **Longer Time Horizons**: Gathering data over longer time periods could improve the model's ability to predict diabetes onset and progression more accurately.
 
 By addressing these areas, we could further enhance the model’s reliability and applicability in real-world healthcare settings.
 
@@ -203,4 +203,3 @@ By addressing these areas, we could further enhance the model’s reliability an
 The interactive dashboard allows users to explore various data visualizations and model predictions related to diabetes trends. 
 -View different charts that highlight the relationship between diabetes and key health factors such as age, BMI, glucose levels, etc.
 -You can explore the interactive dashboard here: [**Diabetes Prediction Dashboard**](https://public.tableau.com/app/profile/yoada.zeleke/viz/UncoveringDiabetesTrendsEDAandPredictiveModeling/Dashboard1)
-
