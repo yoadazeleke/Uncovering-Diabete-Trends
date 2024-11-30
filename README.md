@@ -43,68 +43,36 @@ The dataset for this case study comes from the [Healthcare Diabetes dataset on K
 
 - To better understand the dataset, we first conducted an exploratory data analysis (EDA), examining the first few rows and column names.
 
-          head(Diabetes_Healthcare_Data)
-          colnames(Diabetes_Healthcare_Data)
-
 2. Data CLeaning
 
 - We removed irrelevant columns such as "Age Group," "Pregnancy Risk Category," and "BMI Category," which were unnecessary for the prediction task.
 
-          Diabetes_Healthcare_Data <- Diabetes_Healthcare_Data[, !(colnames(Diabetes_Healthcare_Data) %in% c("Age Group", "Pregnancy Risk Category", "BMI Category"))]
-
 3. Handling Missing Data
 - Next, we checked for missing values and handled them appropriately by imputing or removing rows/columns based on the severity of missing data.
 
-          sum(is.na(Diabetes_Healthcare_Data))
-
 4. Data Splitting
 - We split the dataset into training (80%) and testing (20%) sets to ensure the model could generalize well to new, unseen data.
-
-          set.seed(123)
-          train_indices <- sample(1:nrow(Diabetes_Healthcare_Data), 0.8 * nrow(Diabetes_Healthcare_Data))
-          train_data <- Diabetes_Healthcare_Data[train_indices, ]
-          test_data <- Diabetes_Healthcare_Data[-train_indices, ]
-
+  
 5. Exploring Relationships Between Variables
 - We visualized relationships between key features and the target variable to identify useful predictors.
 
 5.1 Plasma Glucose Levels Distribution
-- We analyzed the distribution of plasma glucose levels using a histogram.
-
-               hist(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-                    main="Histogram of Glucose Levels", 
-                    xlab="Plasma Glucose (mg/dL)", 
-                    ylab="Frequency", 
-                    col="lightblue")
+- I analyzed the distribution of plasma glucose levels using a histogram.
+![Histogram_Glucose](https://github.com/user-attachments/assets/23320f58-b4d0-4b21-a65e-bbd3e8e63e65)
 
 5.2 BMI vs. Plasma Glucose
 - A scatter plot was created to examine the relationship between BMI and plasma glucose levels.
+![BMI and Glucose Scatter Plot](https://github.com/user-attachments/assets/43e4f581-42f3-48ee-ab35-a0ef45eb1438)
 
-               plot(Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`, 
-                    Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-                    main="BMI vs. Plasma Glucose", 
-                    xlab="Body Mass Index (kg/m²)", 
-                    ylab="Plasma Glucose (mg/dL)", 
-                    col="lightblue", 
-                    pch=19)
-     
 5.3 Blood Pressure vs. Diabetes Status
 - A boxplot was created to visualize the relationship between blood pressure and diabetes status.
+![Blood Pressure vs  Diabetes Status](https://github.com/user-attachments/assets/4e1cefe4-8382-4da6-b7aa-17bbe7a3c438)
 
-           boxplot(`Diastolic Blood Pressure (mm Hg)` ~ `Diabetes Status (1 = Positive, 0 = Negative)`, 
-                  data = Diabetes_Healthcare_Data, 
-                  main="Blood Pressure by Diabetes Status", 
-                  xlab="Diabetes Status (1 = Positive, 0 = Negative)", 
-                  ylab="Blood Pressure (mm Hg)", 
-                  col="lightblue")
         
 5.4 Correlation Between Plasma Glucose and BMI
-- We computed the correlation coefficient between plasma glucose levels and BMI to identify any linear relationship.
-
-               cor(Diabetes_Healthcare_Data$`Plasma Glucose (mg/dL)`, 
-               Diabetes_Healthcare_Data$`Body Mass Index (kg/m²)`)
-
-The correlation coefficient was found to be 0.225, indicating a weak positive correlation.
+- I computed the correlation coefficient between plasma glucose levels and BMI to identify any linear relationship.
+- The correlation coefficient was found to be 0.225, indicating a weak positive correlation.
+![BMI vs Glucose](https://github.com/user-attachments/assets/7dc54981-6be0-45d2-9b77-68a252db623e)
 
 ## Data Preprocessing
 
@@ -113,30 +81,14 @@ In this section, we'll prepare the data for building the model. This involves a 
 - 1. Loading the Data
 First, we load the data from a CSV file.
 
-          data <- read.csv("Diabetes_Healthcare_Data")
-
-This command reads the data file and stores it in the variable data.
-
 - 2. Handling Missing Data
 Next, we check for and remove any rows that have missing values (NA). This is important because most models can't work with incomplete data.
-
-          data <- na.omit(data)  # Removing rows with NA values
-
-This command removes any row with missing values from the dataset.
 
 - 3. Encoding Categorical Variables
 If our dataset has categorical data (like "Yes" or "No"), we need to convert it into a format the model can understand. In this case, we’re encoding the target variable Diabetes_Status into two categories: Negative and Positive.
 
-          data$Diabetes_Status <- factor(data$Diabetes_Status, levels = c(0, 1), labels = c("Negative", "Positive"))
-
-This code converts the Diabetes_Status column to a factor (categorical variable) with labels "Negative" for 0 and "Positive" for 1.
-
 - 4. Feature Scaling
 Feature scaling is important when we have features (like BMI) with different units of measurement. Scaling helps the model treat each feature equally. In this case, we are scaling the BMI feature.
-
-          data$BMI <- scale(data$BMI)  # Scaling BMI feature
-
-This code standardizes the BMI values, so they all lie within a similar range, making it easier for the model to process.
 
 - 5. Data Splitting
 Now, we split the data into two parts: one for training the model and the other for testing it. We’ll use 80% of the data for training and 20% for testing.
